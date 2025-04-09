@@ -7,22 +7,14 @@
 
 TYPE E_Request :
 (
-	{attribute 'hide'}
-    Undefined   := 0,
 	{attribute 'analysis' := '-27'}
 	Reset       := 1,
 	{attribute 'analysis' := '-27'}
     Start       := 2,
 	{attribute 'analysis' := '-27'}
-	Pause		:= 4,
+	Stop		:= 3,
 	{attribute 'analysis' := '-27'}
-	Hold		:= 5,
-	{attribute 'analysis' := '-27'}
-	Complete	:= 6,
-	{attribute 'analysis' := '-27'}
-	Stop		:= 7,
-	{attribute 'analysis' := '-27'}
-	Abort		:= 8
+	Abort		:= 4
 );
 END_TYPE]]></Declaration>
   </DUT>

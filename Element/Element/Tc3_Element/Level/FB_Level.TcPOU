@@ -44,23 +44,6 @@ fbEvent.fbObserver.M_Attach(iComponent);
 M_Attach:= TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Completing" Id="{c6fed046-2fac-006b-3181-ebbd4fe6ee48}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Completing : BOOL (* Return*)
-VAR
-	nIndex: 	UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Completing:= TRUE;
-WHILE nIndex < fbList.nLength DO
-    IF fbList.M_Index(nIndex).M_Request(E_Request.Complete) THEN
-		;
-	ELSE
-		M_Completing:= FALSE;
-	END_IF
-	nIndex := nIndex + 1;
-END_WHILE]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_Detach" Id="{7aeefa55-b634-02b3-27c8-71b7445f7fa7}">
       <Declaration><![CDATA[METHOD PUBLIC M_Detach : BOOL
 VAR_INPUT
@@ -68,40 +51,6 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Holding" Id="{67597213-4811-09c4-36d1-5aca3a31e2cd}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Holding : BOOL (* Return*)
-VAR
-	nIndex: 	UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Holding:= TRUE;
-WHILE nIndex < fbList.nLength DO
-    IF fbList.M_Index(nIndex).M_Request(E_Request.Hold) THEN
-		;
-	ELSE
-		M_Holding:= FALSE;
-	END_IF
-	nIndex := nIndex + 1;
-END_WHILE]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Pausing" Id="{1ba633b2-d05c-0560-1aa5-7f2942abd4b4}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Pausing : BOOL (* Return*)
-VAR
-	nIndex: 	UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Pausing:= TRUE;
-WHILE nIndex < fbList.nLength DO
-    IF fbList.M_Index(nIndex).M_Request(E_Request.Pause) THEN
-		;
-	ELSE
-		M_Pausing:= FALSE;
-	END_IF
-	nIndex := nIndex + 1;
-END_WHILE]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Resetting" Id="{ae571459-9edd-0301-20e5-a7a9f4f76ff7}">
@@ -116,23 +65,6 @@ WHILE nIndex < fbList.nLength DO
 		;
 	ELSE
 		M_Resetting:= FALSE;
-	END_IF
-	nIndex := nIndex + 1;
-END_WHILE]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Resuming" Id="{06196f4e-c86d-0ae2-229a-58e2c6704821}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Resuming : BOOL (* Return*)
-VAR
-	nIndex: 	UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Resuming:= TRUE;
-WHILE nIndex < fbList.nLength DO
-    IF fbList.M_Index(nIndex).M_Request(E_Request.Pause) THEN
-		;
-	ELSE
-		M_Resuming:= FALSE;
 	END_IF
 	nIndex := nIndex + 1;
 END_WHILE]]></ST>
@@ -168,23 +100,6 @@ WHILE nIndex < fbList.nLength DO
 		;
 	ELSE
 		M_Stopping:= FALSE;
-	END_IF
-	nIndex := nIndex + 1;
-END_WHILE]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Unholding" Id="{52fbb6cc-2f0d-051f-0b83-26c074ef5b9c}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Unholding : BOOL (* Return*)
-VAR
-	nIndex: 	UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Unholding:= TRUE;
-WHILE nIndex < fbList.nLength DO
-    IF fbList.M_Index(nIndex).M_Request(E_Request.Start) THEN
-		;
-	ELSE
-		M_Unholding:= FALSE;
 	END_IF
 	nIndex := nIndex + 1;
 END_WHILE]]></ST>

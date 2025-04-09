@@ -23,8 +23,8 @@ VAR
 	stDebug:			ST_Event;					// last debug event
 	stInfo:				ST_Event;					// last info event
 	stWarning:			ST_Event;					// last warning event
-	stError:			ST_Event;					// last stop event
-	stAbort:			ST_Event;					// last abort event
+	stError:			ST_Event;					// last error event
+	stFatal:			ST_Event;					// last Fatal event
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// https://peterzerlauth.com/
@@ -41,34 +41,6 @@ END_VAR
       <Implementation>
         <ST><![CDATA[THIS^.iParent:= iParent;
 fbObserver.iParent:= iParent;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Abort" Id="{a968dc5e-d8ee-079a-0799-c81d1c9d2558}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Abort
-VAR_INPUT
-	sMessage:				STRING(255);
-	nID:					ULINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[stAbort.sMessage:= sMessage;
-stAbort.iSource:= iParent;
-stAbort.sInstance:= iParent.P_Reflection.P_Instance;
-stAbort.sClass:= iParent.P_Reflection.P_Class;
-stAbort.eEventType:= E_Event.Error;
-stAbort.tTimestamp:= iParent.P_Reflection.P_Timestamp;
-stAbort.nID:= nID;
-stAbort.sDefault:= M_Build(sMessage);
-stAbort.sArguments:= M_Arguments();
-stAbort.stFlags.bActive:= TRUE;
-stAbort.stFlags.bRemove:= FALSE;
-
-IF iLogger = 0 THEN
-	M_Log(stAbort);
-ELSE
-	iLogger.M_Log(stAbort);
-END_IF
-
-fbObserver.M_Notify(iParent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_AddBOOL" Id="{55367f5b-ac71-0a63-095c-881721842948}">
@@ -214,6 +186,34 @@ IF iLogger = 0 THEN
 ELSE
 	iLogger.M_Log(stError);
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Fatal" Id="{a968dc5e-d8ee-079a-0799-c81d1c9d2558}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Fatal
+VAR_INPUT
+	sMessage:				STRING(255);
+	nID:					ULINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[stFatal.sMessage:= sMessage;
+stFatal.iSource:= iParent;
+stFatal.sInstance:= iParent.P_Reflection.P_Instance;
+stFatal.sClass:= iParent.P_Reflection.P_Class;
+stFatal.eEventType:= E_Event.Error;
+stFatal.tTimestamp:= iParent.P_Reflection.P_Timestamp;
+stFatal.nID:= nID;
+stFatal.sDefault:= M_Build(sMessage);
+stFatal.sArguments:= M_Arguments();
+stFatal.stFlags.bActive:= TRUE;
+stFatal.stFlags.bRemove:= FALSE;
+
+IF iLogger = 0 THEN
+	M_Log(stFatal);
+ELSE
+	iLogger.M_Log(stFatal);
+END_IF
+
+fbObserver.M_Notify(iParent);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Info" Id="{d9a244f2-1d6f-434f-aab4-cad6aacbb94f}">

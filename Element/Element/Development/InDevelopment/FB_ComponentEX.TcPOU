@@ -41,7 +41,7 @@ IF bAbort THEN
 	fbEvent.M_AddSTRING('1');
 	fbEvent.M_AddSTRING('2');
 	fbEvent.M_AddSTRING('3');
-	fbEvent.M_Abort('First Error Abort %s %s %s', 6);
+	fbEvent.M_Fatal('First Error Abort %s %s %s', 6);
 END_IF
 
 IF bStop THEN

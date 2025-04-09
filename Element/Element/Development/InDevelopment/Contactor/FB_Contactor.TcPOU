@@ -22,7 +22,7 @@ END_VAR
 	IF bInput  THEN
 		;
 	ELSE
-		P_Event.M_Abort('Feedback wrong state %s', 0);		
+		P_Event.M_Fatal('Feedback wrong state %s', 0);		
 	END_IF
 END_IF
 
@@ -37,11 +37,11 @@ END_IF
 	IF bInput THEN
 		M_Starting:= TRUE;
 	ELSE
-		P_Event.M_Abort('Feedback wrong state %s', 0);
+		P_Event.M_Fatal('Feedback wrong state %s', 0);
 	END_IF
 ELSE
 	IF bInput THEN
-		P_Event.M_Abort('Feedback wrong state %s', 0);
+		P_Event.M_Fatal('Feedback wrong state %s', 0);
 	ELSE
 		bOutput:= TRUE;
 	END_IF	

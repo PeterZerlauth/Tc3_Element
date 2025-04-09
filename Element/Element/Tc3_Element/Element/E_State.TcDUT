@@ -6,22 +6,14 @@
 {attribute 'to_string'}
 TYPE E_State :
 (
-    Resetting       := -1,
-   	Idle            := 0,
-    Starting        := 1,
-    Execute         := 2,
-	Pausing			:= 3,
-	Paused			:= 4,
-	Resuming		:= 5,
-	Holding			:= 6,
-	Held			:= 7,
-	Unholding		:= 8,
-    Completing      := 9,
-    Completed       := 10,
-    Stopping        := 11,
-    Stopped         := 12,
-    Aborting        := 13,
-    Aborted         := 14
+    Resetting       := 0,
+   	Idle            := 1,
+    Starting        := 2,
+    Execute         := 3,
+    Stopping        := 4,
+    Stopped         := 5,
+    Aborting        := 6,
+    Aborted         := 7
 
 )INT;
 END_TYPE]]></Declaration>

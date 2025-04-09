@@ -19,7 +19,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 IF bAbort THEN
-	P_Event.M_Abort('msg', 0);
+	P_Event.M_Fatal('msg', 0);
 END_IF]]></ST>
       </Implementation>
     </Method>

@@ -10,6 +10,7 @@ VAR
 	aEvent:						ARRAY [0..nMaxLength - 1] OF ST_Event;
 	fbFile:						FB_File;
 	bWriteLine: BOOL;
+	bOpen: BOOL;
 END_VAR	
 
 ]]></Declaration>
@@ -18,14 +19,12 @@ END_VAR
 
 fbFile();
 
-IF fbFile.P_Open THEN
-	;
-ELSE
-	fbFile.M_Create(sPathName);
+IF bOpen THEN
+	bOpen:= NOT fbFile.M_Open(sPathName);
 END_IF
 
 IF bWriteLine THEN
-	bWriteLine:= NOT fbFile.M_AppendLine('Test');
+	bWriteLine:= NOT fbFile.M_Append('Test');
 END_IF]]></ST>
     </Implementation>
     <Method Name="M_Delete" Id="{b177098c-f698-01c6-37e0-2fb007b123d9}">

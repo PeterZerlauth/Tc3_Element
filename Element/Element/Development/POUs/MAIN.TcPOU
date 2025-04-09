@@ -13,7 +13,9 @@ VAR
 	bInit: 				BOOL:= TRUE;
 	exceptionCode: 		__SYSTEM.ExceptionCode;
 	exception: 			__SYSTEM.ExceptionCode;
-	fbFileLogger:		FB_FileLogger<10>:= (sPathName:= 'C:\temp\log.txt');
+	fbFileLogger:		FB_FileLogger<10>:= (sPathName:= 'C:\Temp\log.txt');
+	stEvent: 			Tc3_Element.ST_Event;
+	bLog: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[bTest:= NOT bTest;
@@ -41,6 +43,21 @@ END_IF
 
 
 fbFileLogger();
+
+IF bLog THEN
+	bLog:= FALSE;
+	stEvent.nID:= 10;
+	stEvent.eEventType:= E_EventType.Abort;
+	stEvent.sInstance:= 'Instance';
+	stEvent.sClass:= 'Class';
+	stEvent.sMessage:= 'Message';
+	stEvent.tTimestamp:= DT#2025-01-01-00:00;
+	fbFileLogger.M_Log(stEvent);
+END_IF
+
+
+
+
 ]]></ST>
     </Implementation>
   </POU>

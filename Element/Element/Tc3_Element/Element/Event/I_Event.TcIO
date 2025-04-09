@@ -3,13 +3,6 @@
   <Itf Name="I_Event" Id="{86200139-fcb7-4d9e-9f1b-6b3e88f31cc6}">
     <Declaration><![CDATA[INTERFACE I_Event EXTENDS I_Object
 ]]></Declaration>
-    <Method Name="M_Abort" Id="{23e2171c-74c6-00b8-2913-0c29fad8a6bb}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Abort
-VAR_INPUT
-	sMessage:				STRING(255);
-	nID:					ULINT;
-END_VAR]]></Declaration>
-    </Method>
     <Method Name="M_AddBOOL" Id="{6fc486ba-f21e-0356-3f27-fe3c53264131}">
       <Declaration><![CDATA[METHOD PUBLIC M_AddBOOL : I_Event
 VAR_INPUT
@@ -55,6 +48,13 @@ END_VAR
     </Method>
     <Method Name="M_Error" Id="{bc83aad4-ae26-008e-3b0c-5fc1c7225e6c}">
       <Declaration><![CDATA[METHOD PUBLIC M_Error
+VAR_INPUT
+	sMessage:				STRING(255);
+	nID:					ULINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Fatal" Id="{23e2171c-74c6-00b8-2913-0c29fad8a6bb}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Fatal
 VAR_INPUT
 	sMessage:				STRING(255);
 	nID:					ULINT;

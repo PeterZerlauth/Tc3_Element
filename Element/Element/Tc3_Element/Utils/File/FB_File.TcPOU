@@ -4,6 +4,7 @@
     <Declaration><![CDATA[{attribute 'no_explicit_call'} 
 FUNCTION_BLOCK FB_File
 VAR
+	sBuffer:		STRING(1000);
     fbCreateDir:	FB_CreateDir;
 	fbOpen:			FB_FileOpen;
 	fbRead:			FB_FileRead;
@@ -24,14 +25,12 @@ fbOpen();
 fbClose();
 fbDelete();
 fbWrite();
-fbRead();
-
-]]></ST>
+fbRead();]]></ST>
     </Implementation>
     <Method Name="M_Append" Id="{78c6ac39-a28e-0b21-27e6-004ffe5404c6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Append : BOOL
 VAR_INPUT
-	Text:			STRING(255);
+	Text:			STRING(1000);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF fbWrite.bExecute THEN
@@ -42,20 +41,21 @@ END_VAR]]></Declaration>
 		;
 	ELSE
 		M_Append:= TRUE;
+		sBuffer:= '';
 		fbWrite.bExecute:= FALSE;
 	END_IF
 ELSE
 	fbWrite.bExecute:= TRUE;
-	fbWrite.pWriteBuff:= ADR(Text);
-	fbWrite.cbWriteLen:= INT_TO_UDINT(Len(Text));
-END_IF
-]]></ST>
+	sBuffer:= Text;
+	fbWrite.pWriteBuff:= ADR(sBuffer);
+	fbWrite.cbWriteLen:= Len2(fbWrite.pWriteBuff);	
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_AppendLine" Id="{fc6936eb-07c3-02c3-280c-06c07ac940fe}">
       <Declaration><![CDATA[METHOD PUBLIC M_AppendLine : BOOL
 VAR_INPUT
-	Text:			STRING(255);
+	Text:			STRING(1000);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Text:= Concat(Text, '$R');
@@ -198,21 +198,18 @@ IF fbOpen.bExecute THEN
     // If the process is still busy, do nothing and wait
     ELSIF fbOpen.bBusy THEN
         ;
-        
     // If the file has been successfully opened
-    ELSIF fbOpen.hFile <> 0 THEN    
-        // Assign the file handle
-        fbRead.hFile:= fbOpen.hFile;
-        fbWrite.hFile:= fbOpen.hFile;
-        fbClose.hFile:= fbOpen.hFile;
+    ELSE
         fbOpen.bExecute:= FALSE;
-        // File is open
-        M_Open:= TRUE;
     END_IF    
 ELSE
     // If the file handle is invalid (e.g., the file is not open)
-    IF fbOpen.hFile = 0 THEN
-        // file is open
+    IF fbOpen.hFile <> 0 THEN
+		// Assign the file handle
+		fbRead.hFile:= fbOpen.hFile;
+        fbWrite.hFile:= fbOpen.hFile;
+        fbClose.hFile:= fbOpen.hFile;
+		 // file is open
         M_Open:= TRUE;    
     ELSE
         // Start the file opening process with the specified path and mode
@@ -267,7 +264,6 @@ END_VAR]]></Declaration>
 	END_IF
 ELSE
 	fbWrite.bExecute:= TRUE;
-	MEMCPY(ADR(fbWrite.cbWrite), Value.pValue, SIZEOF(POINTER TO BYTE));
 	fbWrite.cbWriteLen:= DINT_TO_UDINT(Value.diSize);
 END_IF
 ]]></ST>

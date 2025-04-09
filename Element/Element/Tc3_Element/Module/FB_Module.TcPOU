@@ -52,21 +52,6 @@ eModeRequest:= E_Mode.Undefined;]]></ST>
 				fbLevel1.M_Request(E_Request.Abort);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Completing" Id="{933fd6f1-4c4e-026e-3128-520b64ab76d5}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Completing : BOOL (* Return*)
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Completing:= 	fbLevel2.M_Request(E_Request.Complete) AND
-				fbLevel1.M_Request(E_Request.Complete);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Holding" Id="{ab8a9dd6-7378-063d-2340-22d0380b9c11}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Holding : BOOL (* Return*)
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Holding:= fbLevel1.M_Request(E_Request.Hold);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_Idle" Id="{53713e89-9f8a-0ca1-3503-bec2867bc268}">
       <Declaration><![CDATA[METHOD PROTECTED M_Idle : BOOL (* Return*)
 ]]></Declaration>
@@ -117,7 +102,7 @@ END_VAR]]></Declaration>
 		IF eModePrevious = E_Mode.Manual THEN
 			fbEvent.M_AddSTRING(TO_STRING(eModePrevious));
 			fbEvent.M_AddSTRING(TO_STRING(eMode));
-			fbEvent.M_Abort('Module mode changed form %s to %s', 1002);
+			fbEvent.M_Fatal('Module mode changed form %s to %s', 1002);
 		END_IF
 	E_Mode.Manual:
 		;
@@ -153,13 +138,6 @@ END_VAR
         <ST><![CDATA[M_Stopping:= 	fbLevel3.M_Request(E_Request.Stop) AND
 				fbLevel2.M_Request(E_Request.Stop) AND
 				fbLevel1.M_Request(E_Request.Stop);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Unholding" Id="{c789b877-5992-021d-0162-14767b04eb92}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Unholding : BOOL (* Return*)
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Unholding:= fbLevel1.M_Request(E_Request.Start);]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_Mode" Id="{a773e62d-20bd-0c96-369b-0f3305d57073}">
