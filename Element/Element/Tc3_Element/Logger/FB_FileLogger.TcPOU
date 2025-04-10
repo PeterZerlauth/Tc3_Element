@@ -9,8 +9,9 @@ VAR
 	nLength:					DINT;
 	aEvent:						ARRAY [0..nMaxLength - 1] OF ST_Event;
 	fbFile:						FB_File;
-	bWriteLine: BOOL;
-	bOpen: BOOL;
+	bWriteLine:					BOOL;
+	bOpen:						BOOL;
+	bClose: 					BOOL;
 END_VAR	
 
 ]]></Declaration>
@@ -24,7 +25,12 @@ IF bOpen THEN
 END_IF
 
 IF bWriteLine THEN
-	bWriteLine:= NOT fbFile.M_Append('Test');
+	bWriteLine:= NOT fbFile.M_AppendLine('Test');
+END_IF
+
+
+IF bClose THEN
+	bClose:= NOT fbFile.M_Close();
 END_IF]]></ST>
     </Implementation>
     <Method Name="M_Delete" Id="{b177098c-f698-01c6-37e0-2fb007b123d9}">

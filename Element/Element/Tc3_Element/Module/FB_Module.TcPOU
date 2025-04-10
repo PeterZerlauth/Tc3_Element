@@ -7,16 +7,17 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	fbLogging:					FB_LoggingProvider;
-	fbLogger:					FB_Logger<20>;
-	{attribute 'OPC.UA.DA' := '1'}
-	{attribute 'OPC.UA.DA.Access' := '1'}
-	eModeRequest:					E_Mode:= E_Mode.Automatic;				// Requested mod
 	{attribute 'OPC.UA.DA' := '1'}
 	{attribute 'OPC.UA.DA.Access' := '2'}
-	eMode:							E_Mode;				// Current mode
+	eMode:							E_Mode;							// Current mode
+		{attribute 'OPC.UA.DA' := '1'}
+	{attribute 'OPC.UA.DA.Access' := '1'}
+	eModeRequest:					E_Mode:= E_Mode.Automatic;		// Requested mode
 	{attribute 'hide'}
-	eModePrevious:					E_Mode;				// Previous mode
+	eModePrevious:					E_Mode;							// Previous mode
+	
+	fbLogging:					FB_LoggingProvider;
+	fbLogger:					FB_Logger<20>;
 	
 	fbLevel1:					FB_Level;
 	fbLevel2:					FB_Level;
@@ -151,5 +152,28 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <ObjectProperties>
+      <XmlArchive>
+        <Data>
+          <o xml:space="preserve" t="LicenseProperty">
+            <l2 n="Licenses" cet="LicenseData">
+              <o>
+                <v n="Key">{00000000-0000-0000-0000-000000000000}</v>
+                <v n="OemId">{00000000-0000-0000-0000-000000000000}</v>
+                <v n="NoTrialLicense">false</v>
+                <v n="Comment">""</v>
+              </o>
+            </l2>
+          </o>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Guid">System.Guid</Type>
+          <Type n="LicenseData">{a50ed36f-2d70-4387-ad2d-9cd72ee02f9f}</Type>
+          <Type n="LicenseProperty">{ec6b18ef-cd41-4646-b1b3-985c60f930b9}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
+    </ObjectProperties>
   </POU>
 </TcPlcObject>

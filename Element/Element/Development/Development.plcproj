@@ -16,8 +16,6 @@
     <Implicit_KindOfTask>{2c70bf9e-0ec4-4385-86ff-8cf5ae94afee}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{0531264e-1544-43bb-aa88-8bd2555dd79e}</Implicit_Jitter_Distribution>
     <LibraryReferences>{b988453e-71f7-43ed-94cc-cf92d75d86f3}</LibraryReferences>
-    <AutoUpdateVisuProfile>true</AutoUpdateVisuProfile>
-    <AutoUpdateUmlProfile>true</AutoUpdateUmlProfile>
     <Released>false</Released>
     <CombineIds>true</CombineIds>
     <CompilerDefines>release,VISU_USEPROPERTYINFO</CompilerDefines>

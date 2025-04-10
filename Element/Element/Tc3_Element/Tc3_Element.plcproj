@@ -24,11 +24,9 @@
     <Placeholder>Tc3_Element</Placeholder>
     <Author>Peter Zerlauth</Author>
     <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
-    <CombineIds>true</CombineIds>
+    <CombineIds>false</CombineIds>
     <DocFormat>
     </DocFormat>
-    <AutoUpdateVisuProfile>true</AutoUpdateVisuProfile>
-    <AutoUpdateUmlProfile>true</AutoUpdateUmlProfile>
     <Description>State Model with Observer and Events</Description>
     <ObjectRepresentation>base64</ObjectRepresentation>
     <CompilerDefines>release</CompilerDefines>

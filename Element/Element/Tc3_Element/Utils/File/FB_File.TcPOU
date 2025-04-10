@@ -4,14 +4,17 @@
     <Declaration><![CDATA[{attribute 'no_explicit_call'} 
 FUNCTION_BLOCK FB_File
 VAR
-	sBuffer:		STRING(1000);
     fbCreateDir:	FB_CreateDir;
 	fbOpen:			FB_FileOpen;
 	fbRead:			FB_FileRead;
 	fbLoad:			FB_FileLoad;
+	fbPuts:			FB_FilePuts;
 	fbWrite:		FB_FileWrite;
 	fbClose:		FB_FileClose;
 	fbDelete:		FB_FileDelete;
+END_VAR
+VAR_INPUT
+	nMode:			DWORD:= (FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT);
 END_VAR
 VAR_OUTPUT
 	nError:			UDINT;
@@ -22,44 +25,56 @@ END_VAR
 fbCreateDir();
 fbLoad();
 fbOpen();
-fbClose();
 fbDelete();
+fbPuts();
 fbWrite();
-fbRead();]]></ST>
+fbRead();
+fbClose();
+
+]]></ST>
     </Implementation>
     <Method Name="M_Append" Id="{78c6ac39-a28e-0b21-27e6-004ffe5404c6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Append : BOOL
 VAR_INPUT
-	Text:			STRING(1000);
+	Text:			T_MaxString;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF fbWrite.bExecute THEN
-	IF fbWrite.bError THEN
-		nError:= fbWrite.nErrId;
-		fbWrite.bExecute:= FALSE;
-	ELSIF fbWrite.bBusy THEN
+        <ST><![CDATA[IF fbPuts.bExecute THEN
+	IF fbPuts.bError THEN
+		nError:= fbPuts.nErrId;
+		fbPuts.bExecute:= FALSE;
+	ELSIF fbPuts.bBusy THEN
 		;
 	ELSE
 		M_Append:= TRUE;
-		sBuffer:= '';
-		fbWrite.bExecute:= FALSE;
+		fbPuts.bExecute:= FALSE;
 	END_IF
 ELSE
-	fbWrite.bExecute:= TRUE;
-	sBuffer:= Text;
-	fbWrite.pWriteBuff:= ADR(sBuffer);
-	fbWrite.cbWriteLen:= Len2(fbWrite.pWriteBuff);	
+	fbPuts.bExecute:= TRUE;
+	fbPuts.sLine:= Text;
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_AppendLine" Id="{fc6936eb-07c3-02c3-280c-06c07ac940fe}">
       <Declaration><![CDATA[METHOD PUBLIC M_AppendLine : BOOL
 VAR_INPUT
-	Text:			STRING(1000);
+	Line:			T_MaxString;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Text:= Concat(Text, '$R');
-M_AppendLine:= M_Append(Text);]]></ST>
+        <ST><![CDATA[IF fbPuts.bExecute THEN
+	IF fbPuts.bError THEN
+		nError:= fbPuts.nErrId;
+		fbPuts.bExecute:= FALSE;
+	ELSIF fbPuts.bBusy THEN
+		;
+	ELSE
+		M_AppendLine:= TRUE;
+		fbPuts.bExecute:= FALSE;
+	END_IF
+ELSE
+	fbPuts.bExecute:= TRUE;
+	fbPuts.sLine:= Concat(Line, '$R');
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Close" Id="{a6e4c170-c2a8-0973-34b1-dd6175461376}">
@@ -80,6 +95,7 @@ END_VAR
 	ELSE
 		nError:= 0;	
 		fbRead.hFile:= 0;
+		fbPuts.hFile:= 0;
 		fbWrite.hFile:= 0;
 		fbClose.hFile:= 0;
 		fbClose.bExecute:= FALSE;
@@ -207,6 +223,7 @@ ELSE
     IF fbOpen.hFile <> 0 THEN
 		// Assign the file handle
 		fbRead.hFile:= fbOpen.hFile;
+		fbPuts.hFile:= fbOpen.hFile;
         fbWrite.hFile:= fbOpen.hFile;
         fbClose.hFile:= fbOpen.hFile;
 		 // file is open
@@ -215,7 +232,7 @@ ELSE
         // Start the file opening process with the specified path and mode
         fbOpen.bExecute:= TRUE;
         fbOpen.sPathName:= PathName;
-        fbOpen.nMode:= (FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT);    
+        fbOpen.nMode:= nMode;   
     END_IF
 END_IF
 ]]></ST>
@@ -264,9 +281,9 @@ END_VAR]]></Declaration>
 	END_IF
 ELSE
 	fbWrite.bExecute:= TRUE;
+	fbWrite.pWriteBuff:= Value.pValue;
 	fbWrite.cbWriteLen:= DINT_TO_UDINT(Value.diSize);
-END_IF
-]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_Error" Id="{ffbbfa3b-bbb8-0e33-3bbe-fc5460add55d}">

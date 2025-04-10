@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_Module01" Id="{3744d03d-359c-4ab8-84fb-4ea93b7a5162}" SpecialFunc="None">
+  <POU Name="FB_Module01" Id="{fd23d038-0b57-09ef-1955-d94c8e0517ac}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Module01 EXTENDS FB_Module
 VAR_INPUT
 END_VAR
@@ -12,18 +12,7 @@ END_VAR]]></Declaration>
       <ST><![CDATA[// https://peterzerlauth.com/
 SUPER^();]]></ST>
     </Implementation>
-    <Method Name="M_Execute" Id="{0f7f4331-8af5-0744-015a-f65d0021dd06}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL
-VAR_INPUT
-END_VAR
-VAR
-	bReturn:					BOOL:= TRUE;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Execute:= TRUE;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Running" Id="{eaffebca-5ff2-4f17-be84-3310a9ace22e}">
+    <Method Name="M_Running" Id="{2098ebcf-6139-0c40-232a-a4f51cd3a4e0}">
       <Declaration><![CDATA[METHOD PROTECTED M_Running
 VAR_INPUT
 END_VAR
@@ -32,7 +21,7 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Starting" Id="{6f002794-61fc-043c-1d84-a8bc502c5d3a}">
+    <Method Name="M_Starting" Id="{a5672791-5f37-476b-802a-3f59e5531bf4}">
       <Declaration><![CDATA[METHOD PROTECTED M_Starting : BOOL
 VAR_INPUT
 END_VAR
@@ -41,7 +30,7 @@ END_VAR
         <ST><![CDATA[M_Starting:= SUPER^.M_Starting();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Stopping" Id="{478c517c-d184-0eaf-2697-597088f6cf3f}">
+    <Method Name="M_Stopping" Id="{8deb5179-ef4f-4df8-bb39-ce953d8989f1}">
       <Declaration><![CDATA[METHOD PROTECTED M_Stopping : BOOL // Return state complete
 VAR_INPUT
 END_VAR

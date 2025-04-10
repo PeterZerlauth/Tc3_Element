@@ -17,8 +17,6 @@
     <Implicit_Jitter_Distribution>{de741b1e-304e-4e67-bdbf-c530a3daf272}</Implicit_Jitter_Distribution>
     <LibraryReferences>{957c7377-9102-4b28-98d1-a57d296306f0}</LibraryReferences>
     <ObjectRepresentation>base64</ObjectRepresentation>
-    <AutoUpdateVisuProfile>true</AutoUpdateVisuProfile>
-    <AutoUpdateUmlProfile>true</AutoUpdateUmlProfile>
     <Released>false</Released>
     <CombineIds>true</CombineIds>
   </PropertyGroup>
