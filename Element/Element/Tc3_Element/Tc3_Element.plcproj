@@ -63,9 +63,6 @@
     <Compile Include="Element\Event\E_Event.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Element\Event\E_EventType.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Element\Event\FB_Event.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -102,7 +99,7 @@
     <Compile Include="Element\Reflection\FB_Reflection.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Element\Reflection\I_Reflection .TcIO">
+    <Compile Include="Element\Reflection\I_Reflection.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Element\Sequence\E_Sequence.TcDUT">
@@ -199,6 +196,12 @@
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="UML State Chart Types">
+      <DefaultResolution>UML Statechart Types, 4.2.2.0 (3S - Smart Software Solutions GmbH)</DefaultResolution>
+      <Namespace>UML_SC</Namespace>
+      <SystemLibrary>true</SystemLibrary>
+      <ResolverGuid>d9a6b70a-92f0-4827-8ca3-8ce8a61652d9</ResolverGuid>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tc3_Element.tmc">
@@ -223,7 +226,7 @@
           <d n="SubKeys" t="Hashtable" />
           <d n="Values" t="Hashtable" ckt="String" cvt="String">
             <v>CurrentUmlCompilerVersion</v>
-            <v>4.2.1.0</v>
+            <v>4.4.0.0</v>
           </d>
         </o>
         <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>

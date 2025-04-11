@@ -35,8 +35,14 @@ CASE eState OF
 		
 		CASE eStateRequest OF
 			E_State.Starting, E_State.Execute:
-            	eState := E_State.Starting;				
-			
+            	eState := E_State.Starting;
+	
+			E_State.Stopping, E_State.Stopped:
+            	eState := E_State.Stopping;
+
+			E_State.Aborting, E_State.Aborted:
+            	eState := E_State.Aborting;
+	
 		END_CASE
 
     // Starting state:
@@ -44,7 +50,16 @@ CASE eState OF
         IF M_Starting() THEN
             eState := E_State.Execute;
         END_IF
+		
+		CASE eStateRequest OF
+			E_State.Stopping, E_State.Stopped:
+            	eState := E_State.Stopping;
 
+			E_State.Aborting, E_State.Aborted:
+            	eState := E_State.Aborting;
+	
+		END_CASE
+			
     // Execute state:
     E_State.Execute:
         IF M_Execute() THEN
@@ -57,7 +72,7 @@ CASE eState OF
 
 			E_State.Aborting, E_State.Aborted:
             	eState := E_State.Aborting;				
-			
+
 		END_CASE
 
     // Stopping state:
@@ -65,6 +80,11 @@ CASE eState OF
         IF M_Stopping() THEN
             eState := E_State.Stopped;
         END_IF
+		CASE eStateRequest OF
+			E_State.Aborting, E_State.Aborted:
+            	eState := E_State.Aborting;				
+
+		END_CASE
 
     // Stopped state:
     E_State.Stopped:
@@ -190,34 +210,33 @@ END_VAR
 CASE eRequest OF
 	E_Request.Reset:
 		eStateRequest:= E_State.Resetting;
-		CASE eState OF 
+		CASE eState OF
 			E_State.Execute, E_State.Idle:
 				M_Request:= TRUE;
-		END_CASE			
-		
+		END_CASE
+
 	E_Request.Start:
 		eStateRequest:= E_State.Execute;
 		CASE eState OF 
 			E_State.Execute:
 				M_Request:= TRUE;
 		END_CASE
-		
+
 	E_Request.Stop:
 		eStateRequest:= E_State.Stopped;
-		CASE eState OF 
+		CASE eState OF
 			E_State.Stopped, E_State.Aborted, E_State.Idle:
 				M_Request:= TRUE;
 		END_CASE
-	
+
 	E_Request.Abort:
 		eStateRequest:= E_State.Aborted;
-		CASE eState OF 
+		CASE eState OF
 			E_State.Aborted:
 				M_Request:= TRUE;
 		END_CASE	
-	
-END_CASE
-]]></ST>
+
+END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Resetting" Id="{9e5fa12d-dc9f-0271-3ab1-62fbd4e3c4cb}" FolderPath="State\">

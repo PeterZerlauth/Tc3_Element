@@ -24,7 +24,7 @@ VAR
 	stInfo:				ST_Event;					// last info event
 	stWarning:			ST_Event;					// last warning event
 	stError:			ST_Event;					// last error event
-	stFatal:			ST_Event;					// last Fatal event
+	stFatal:			ST_Event;					// last fatal event
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// https://peterzerlauth.com/
@@ -179,7 +179,7 @@ stError.nID:= nID;
 stError.sDefault:= M_Build(sMessage);
 stError.sArguments:= M_Arguments();
 stError.stFlags.bActive:= TRUE;
-stError.stFlags.bRemove:= FALSE;
+stError.stFlags.bRemove:= TRUE;
 
 IF iLogger = 0 THEN
 	M_Log(stError);
@@ -250,7 +250,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[// @ToDo]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Warning" Id="{d443b8bb-774e-487e-80a2-79cf66a0376c}">

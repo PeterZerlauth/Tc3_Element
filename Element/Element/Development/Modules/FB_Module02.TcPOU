@@ -62,13 +62,10 @@ END_CASE]]></ST>
         <ST><![CDATA[SUPER^.M_Idle();
 
 fbLevel4.M_Attach(fbPnozMulti);
-
 fbLevel3.M_Attach(fbComponent0);
 fbLevel3.M_Attach(fbComponent1);
-
 fbLevel2.M_Attach(fbPnozMulti);
 fbLevel2.M_Attach(fbContactor);
-
 fbLevel1.M_Attach(fbCylinder);]]></ST>
       </Implementation>
     </Method>

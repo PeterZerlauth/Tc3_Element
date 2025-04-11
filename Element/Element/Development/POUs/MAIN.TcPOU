@@ -47,7 +47,7 @@ fbFileLogger();
 IF bLog THEN
 	bLog:= FALSE;
 	stEvent.nID:= 10;
-	stEvent.eEventType:= E_EventType.Abort;
+	stEvent.eEventType:= E_Event.Error;
 	stEvent.sInstance:= 'Instance';
 	stEvent.sClass:= 'Class';
 	stEvent.sMessage:= 'Message';

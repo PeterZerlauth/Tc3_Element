@@ -28,6 +28,8 @@ END_VAR]]></Declaration>
       <ST><![CDATA[// https://peterzerlauth.com/
 SUPER^();
 
+fbLogger();
+
 fbLevel1();
 fbLevel2();
 fbLevel3();
@@ -63,6 +65,11 @@ fbLevel4.P_Event.P_Logger:= fbLogging;
 fbLevel3.P_Event.P_Logger:= fbLogging;
 fbLevel2.P_Event.P_Logger:= fbLogging;
 fbLevel1.P_Event.P_Logger:= fbLogging;
+
+fbLevel4.P_Event.P_Observer.M_Attach(THIS^);
+fbLevel3.P_Event.P_Observer.M_Attach(THIS^);
+fbLevel2.P_Event.P_Observer.M_Attach(THIS^);
+fbLevel1.P_Event.P_Observer.M_Attach(THIS^);
 
 fbLevel4.M_Attach(fbLevel3);
 fbLevel4.M_Attach(fbLevel2);
@@ -126,10 +133,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Starting:= 	fbLevel4.M_Request(E_Request.Start) AND_THEN
- 				fbLevel3.M_Request(E_Request.Start) AND_THEN
-				fbLevel2.M_Request(E_Request.Start) AND_THEN
-				fbLevel1.M_Request(E_Request.Start);]]></ST>
+        <ST><![CDATA[M_Starting:= 	fbLevel4.M_Request(E_Request.Start);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Stopping" Id="{36c858d8-accc-01ae-0f5b-a1e3f137f544}">

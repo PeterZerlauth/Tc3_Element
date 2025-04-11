@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <Itf Name="I_Reflection " Id="{62aeab96-2429-49a4-b102-a608a3391a9f}">
-    <Declaration><![CDATA[INTERFACE I_Reflection EXTENDS I_Object
+  <Itf Name="I_Reflection" Id="{62aeab96-2429-49a4-b102-a608a3391a9f}">
+    <Declaration><![CDATA[INTERFACE I_Reflection
 ]]></Declaration>
     <Property Name="P_Class" Id="{cbc4d901-48b2-4e97-9d77-884fb0854f2f}">
       <Declaration><![CDATA[{attribute 'OPC.UA.DA.Property' := '1'}

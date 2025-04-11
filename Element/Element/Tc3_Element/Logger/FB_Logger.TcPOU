@@ -36,8 +36,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// new Length
 nLength:= nLength -1;
-//pList[nPosition]:= iObject;
-Memcpy(ADR(aEvent[nIndex]), ADR(aEvent[nIndex +1]), SIZEOF(POINTER TO ST_Event) * DINT_TO_UDINT(nMaxLength - nIndex));]]></ST>
+MEMCPY(ADR(aEvent[nIndex]), ADR(aEvent[nIndex +1]), SIZEOF(ST_Event) * DINT_TO_UDINT(nMaxLength - nIndex));]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Find" Id="{7446ea89-7013-0042-2993-bd13114e3454}">
@@ -92,8 +91,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// Reset all events
 nLength:= 0;
-Memset(ADR(aEvent), 0, SIZEOF(aEvent));
-]]></ST>
+Memset(ADR(aEvent), 0, SIZEOF(aEvent));]]></ST>
       </Implementation>
     </Method>
   </POU>
