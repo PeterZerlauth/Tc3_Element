@@ -121,6 +121,18 @@ CASE eState OF
         IF M_Resetting() THEN
             eState := E_State.Idle;
         END_IF
+		
+		CASE eStateRequest OF
+			E_State.Starting, E_State.Execute:
+            	eState := E_State.Starting;
+	
+			E_State.Stopping, E_State.Stopped:
+            	eState := E_State.Stopping;
+
+			E_State.Aborting, E_State.Aborted:
+            	eState := E_State.Aborting;
+	
+		END_CASE
 
 END_CASE
 eStateRequest := eState;
@@ -131,8 +143,7 @@ IF eStatePrevious <> eState THEN
     eStatePrevious := eState;
 END_IF]]></ST>
     </Implementation>
-    <Folder Name="State" Id="{ca15ba5f-c875-08b1-19c6-3566ddf8fed6}" />
-    <Method Name="M_Aborted" Id="{f47ae709-6b97-0869-103e-462a949d9bd1}" FolderPath="State\">
+    <Method Name="M_Aborted" Id="{f47ae709-6b97-0869-103e-462a949d9bd1}">
       <Declaration><![CDATA[METHOD PROTECTED M_Aborted : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -141,7 +152,7 @@ END_VAR
         <ST><![CDATA[M_Aborted:= FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Aborting" Id="{5420cd8c-8440-0133-17b0-cfc9fa3a226e}" FolderPath="State\">
+    <Method Name="M_Aborting" Id="{5420cd8c-8440-0133-17b0-cfc9fa3a226e}">
       <Declaration><![CDATA[METHOD PROTECTED M_Aborting : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -151,7 +162,7 @@ END_VAR
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Completed" Id="{a7223eeb-937e-0932-34bf-74539565cf99}" FolderPath="State\">
+    <Method Name="M_Completed" Id="{a7223eeb-937e-0932-34bf-74539565cf99}">
       <Declaration><![CDATA[METHOD PROTECTED M_Completed : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -160,7 +171,7 @@ END_VAR
         <ST><![CDATA[M_Completed:= TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Completing" Id="{25962ce0-1492-0d73-2226-fd61bbb69809}" FolderPath="State\">
+    <Method Name="M_Completing" Id="{25962ce0-1492-0d73-2226-fd61bbb69809}">
       <Declaration><![CDATA[METHOD PROTECTED M_Completing : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -169,7 +180,7 @@ END_VAR
         <ST><![CDATA[M_Completing:= TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Execute" Id="{0a26e879-26ba-0448-077b-265f6eb411a3}" FolderPath="State\">
+    <Method Name="M_Execute" Id="{0a26e879-26ba-0448-077b-265f6eb411a3}">
       <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -178,7 +189,7 @@ END_VAR
         <ST><![CDATA[M_Execute:= FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Idle" Id="{f81e94c9-4b34-0591-0431-3c8c41c7dc3f}" FolderPath="State\">
+    <Method Name="M_Idle" Id="{f81e94c9-4b34-0591-0431-3c8c41c7dc3f}">
       <Declaration><![CDATA[METHOD PROTECTED M_Idle : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -239,7 +250,7 @@ CASE eRequest OF
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Resetting" Id="{9e5fa12d-dc9f-0271-3ab1-62fbd4e3c4cb}" FolderPath="State\">
+    <Method Name="M_Resetting" Id="{9e5fa12d-dc9f-0271-3ab1-62fbd4e3c4cb}">
       <Declaration><![CDATA[METHOD PROTECTED M_Resetting : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -248,7 +259,7 @@ END_VAR
         <ST><![CDATA[M_Resetting:= TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Starting" Id="{7b4cc2a9-4be8-0ad5-3afd-3314d7249ec2}" FolderPath="State\">
+    <Method Name="M_Starting" Id="{7b4cc2a9-4be8-0ad5-3afd-3314d7249ec2}">
       <Declaration><![CDATA[METHOD PROTECTED M_Starting : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -257,7 +268,7 @@ END_VAR
         <ST><![CDATA[M_Starting:= TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Stopped" Id="{415168e7-f2ee-0214-0037-987f9ecb70ed}" FolderPath="State\">
+    <Method Name="M_Stopped" Id="{415168e7-f2ee-0214-0037-987f9ecb70ed}">
       <Declaration><![CDATA[METHOD PROTECTED M_Stopped : BOOL // Return
 VAR_INPUT
 END_VAR
@@ -266,7 +277,7 @@ END_VAR
         <ST><![CDATA[M_Stopped:= FALSE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Stopping" Id="{752f6f5c-84eb-0065-086e-87701d5b75a9}" FolderPath="State\">
+    <Method Name="M_Stopping" Id="{752f6f5c-84eb-0065-086e-87701d5b75a9}">
       <Declaration><![CDATA[METHOD PROTECTED M_Stopping : BOOL // Return state complete
 VAR_INPUT
 END_VAR

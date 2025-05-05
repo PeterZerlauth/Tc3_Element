@@ -21,8 +21,6 @@ VAR
 	
 	fbLevel1:					FB_Level;
 	fbLevel2:					FB_Level;
-	fbLevel3:					FB_Level;
-	fbLevel4:					FB_Level;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[// https://peterzerlauth.com/
@@ -32,8 +30,6 @@ fbLogger();
 
 fbLevel1();
 fbLevel2();
-fbLevel3();
-fbLevel4();
 
 // Detect mode changes
 IF eModeRequest <> E_Mode.Undefined THEN
@@ -49,9 +45,7 @@ eModeRequest:= E_Mode.Undefined;]]></ST>
       <Declaration><![CDATA[METHOD PROTECTED M_Aborting : BOOL (* Return*)
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Aborting:= 	fbLevel4.M_Request(E_Request.Abort) AND
- 				fbLevel3.M_Request(E_Request.Abort) AND
-				fbLevel2.M_Request(E_Request.Abort) AND
+        <ST><![CDATA[M_Aborting:= 	fbLevel2.M_Request(E_Request.Abort) AND
 				fbLevel1.M_Request(E_Request.Abort);]]></ST>
       </Implementation>
     </Method>
@@ -61,22 +55,13 @@ eModeRequest:= E_Mode.Undefined;]]></ST>
       <Implementation>
         <ST><![CDATA[fbLogging.M_Add(fbLogger);
 
-fbLevel4.P_Event.P_Logger:= fbLogging;
-fbLevel3.P_Event.P_Logger:= fbLogging;
+
+P_Event.P_Logger:= fbLogging;
 fbLevel2.P_Event.P_Logger:= fbLogging;
 fbLevel1.P_Event.P_Logger:= fbLogging;
 
-fbLevel4.P_Event.P_Observer.M_Attach(THIS^);
-fbLevel3.P_Event.P_Observer.M_Attach(THIS^);
 fbLevel2.P_Event.P_Observer.M_Attach(THIS^);
 fbLevel1.P_Event.P_Observer.M_Attach(THIS^);
-
-fbLevel4.M_Attach(fbLevel3);
-fbLevel4.M_Attach(fbLevel2);
-fbLevel4.M_Attach(fbLevel1);
-
-fbLevel3.M_Attach(fbLevel2);
-fbLevel3.M_Attach(fbLevel1);
 
 fbLevel2.M_Attach(fbLevel1);
 
@@ -121,9 +106,7 @@ END_CASE]]></ST>
       <Declaration><![CDATA[METHOD PROTECTED M_Resetting : BOOL (* Return*)
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Resetting:= 	fbLevel4.M_Request(E_Request.Reset) AND
- 				fbLevel3.M_Request(E_Request.Reset) AND
-				fbLevel2.M_Request(E_Request.Reset) AND
+        <ST><![CDATA[M_Resetting:= 	fbLevel2.M_Request(E_Request.Reset) AND
 				fbLevel1.M_Request(E_Request.Reset);]]></ST>
       </Implementation>
     </Method>
@@ -133,15 +116,14 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Starting:= 	fbLevel4.M_Request(E_Request.Start);]]></ST>
+        <ST><![CDATA[M_Starting:= 	fbLevel1.M_Request(E_Request.Start) AND_THEN fbLevel2.M_Request(E_Request.Start);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Stopping" Id="{36c858d8-accc-01ae-0f5b-a1e3f137f544}">
       <Declaration><![CDATA[METHOD PROTECTED M_Stopping : BOOL (* Return state complete*)
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Stopping:= 	fbLevel3.M_Request(E_Request.Stop) AND
-				fbLevel2.M_Request(E_Request.Stop) AND
+        <ST><![CDATA[M_Stopping:= 	fbLevel2.M_Request(E_Request.Stop) AND
 				fbLevel1.M_Request(E_Request.Stop);]]></ST>
       </Implementation>
     </Method>
